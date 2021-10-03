@@ -74,7 +74,7 @@ class VentasRegistro
         return $this;
     }
 
-    public function getDateAdd(): ?\DateTimeInterface
+    public function getDateAdd(): ?\DateTime
     {
         return $this->DateAdd;
     }
@@ -110,7 +110,7 @@ class VentasRegistro
         return $this;
     }
 
-    public function getDeliveryDate(): ?\DateTimeInterface
+    public function getDeliveryDate(): ?\DateTime
     {
         return $this->DeliveryDate;
     }
