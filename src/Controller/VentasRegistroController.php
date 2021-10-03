@@ -143,7 +143,7 @@ class VentasRegistroController extends AbstractController
         try{
             $ventasRegistros = $this->ventasRegistroRepository->findOneBy(['id' => $id]);
 
-            $this->customerRepository->removeVentasRegistro($ventasRegistros);
+            $this->ventasRegistroRepository->removeVentasRegistro($ventasRegistros);
         }catch(Throwable $exception){
             return new JsonResponse(['status' => 'Error procesando datos -- '.$exception->getMessage()], Response::HTTP_NO_CONTENT);    
         }
