@@ -107,5 +107,33 @@ class VentasRegistroController extends AbstractController
         return new JsonResponse($data, Response::HTTP_OK);
     }
 
+    /**
+     * @Route("api/ventasregistros/{id}", name="update_ventasregistro", methods={"PUT"})
+     */
+    public function update($id, Request $request): JsonResponse
+    {
+
+        try{    
+            $ventasRegistros = $this->ventasRegistroRepository->findOneBy(['id' => $id]);
+            $data = json_decode($request->getContent(), true);
+
+            empty($data['clientName']) ? true : $ventasRegistros->setclientName($data['clientName']);
+            empty($data['dateAdd']) ? true : $ventasRegistros->setDateAdd($data['dateAdd']);
+            empty($data['friendName']) ? true : $ventasRegistros->setfriendName($data['friendName']);
+            empty($data['deliveryAddress']) ? true : $ventasRegistros->setDeliveryAddress($data['deliveryAddress']);
+            empty($data['deliveryDate']) ? true : $ventasRegistros->setDeliveryDate($data['deliveryDate']);
+            empty($data['ammount']) ? true : $ventasRegistros->setAmmount($data['ammount']);
+            empty($data['phoneNumber']) ? true : $ventasRegistros->setclientName($data['phoneNumber']);
+            empty($data['status']) ? true : $ventasRegistros->setclientName($data['status']);
+
+            $updatedVentasRegistro = $this->ventasRegistroRepository->updateVentasRegistro($ventasRegistros);
+
+        }catch(Throwable $exception){
+            return new JsonResponse(['status' => 'Error en los datos -- '.$exception->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+
+        return new JsonResponse($updatedVentasRegistro->toArray(), Response::HTTP_OK);
+    }
+
     
 }

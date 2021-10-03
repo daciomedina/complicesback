@@ -45,6 +45,14 @@ class VentasRegistroRepository extends ServiceEntityRepository
         $this->manager->flush();
     }
 
+    public function updateVentasRegistro(VentasRegistro $ventasRegistro): VentasRegistro
+    {
+        $this->manager->persist($ventasRegistro);
+        $this->manager->flush();
+
+        return $ventasRegistro;
+    }
+
     // /**
     //  * @return VentasRegistro[] Returns an array of VentasRegistro objects
     //  */
