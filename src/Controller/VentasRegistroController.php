@@ -135,5 +135,20 @@ class VentasRegistroController extends AbstractController
         return new JsonResponse($updatedVentasRegistro->toArray(), Response::HTTP_OK);
     }
 
+    /**
+     * @Route("/api/ventasregistros/{id}", name="delete_ventasregistros", methods={"DELETE"})
+     */
+    public function delete($id): JsonResponse
+    {
+        try{
+            $ventasRegistros = $this->ventasRegistroRepository->findOneBy(['id' => $id]);
+
+            $this->customerRepository->removeVentasRegistro($ventasRegistros);
+        }catch(Throwable $exception){
+            return new JsonResponse(['status' => 'Error procesando datos -- '.$exception->getMessage()], Response::HTTP_NO_CONTENT);    
+        }
+        return new JsonResponse(['status' => 'Ventas Registro deleted'], Response::HTTP_NO_CONTENT);
+    }
+
     
 }

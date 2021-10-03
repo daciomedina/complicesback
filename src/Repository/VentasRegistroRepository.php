@@ -53,6 +53,12 @@ class VentasRegistroRepository extends ServiceEntityRepository
         return $ventasRegistro;
     }
 
+    public function removeVentasRegistro(VentasRegistro $ventasRegistro)
+    {
+        $this->manager->remove($ventasRegistro);
+        $this->manager->flush();
+    }
+
     // /**
     //  * @return VentasRegistro[] Returns an array of VentasRegistro objects
     //  */
